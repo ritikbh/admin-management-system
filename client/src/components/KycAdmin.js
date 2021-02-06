@@ -1,13 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-import { useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
 import { logout } from "../features/userSlice"
 import { Button,Modal,Form,Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {CSVLink} from 'react-csv';
+import { selectUser } from "../features/userSlice";
 
 
 function KycAdmin() {
+    const reduxUser = useSelector(selectUser)
 
     // const [kycShow, setKycShow] = useState(false);
     const [agentShow, setAgentShow] = useState(false);
@@ -150,7 +152,9 @@ const verifyAddress = (e,userId) => {
     axios({
         method: 'post',
         url: 'http://localhost:8000/api/verify-address',
-        data: {user_id:userId} ,
+        data: {user_id:userId,
+                email:reduxUser.email
+            } ,
         headers: {'Content-Type': 'application/json' }
         })
         .then(function (response) {
