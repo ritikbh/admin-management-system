@@ -3,6 +3,8 @@ const cors = require('cors');
 const mysql = require('mysql')
 const authApi = require('./routes/auth')
 const dataApi = require('./routes/api')
+const dotenv = require('dotenv')
+dotenv.config();
 
 const mysqlConnection = require('./connection');
 
